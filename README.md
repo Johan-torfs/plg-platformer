@@ -9,4 +9,8 @@ This 2D platformer uses the 2D platformer microgame template from Unity as a bas
 - Increased the jump take off speed
 - Also increased the jump deceleration
 
+### Jumping next to wall
+When a player was stood next to a wall, he would be unable to jump sometimes. This was caused by the horizontal movement killing the vertical velocity when it detected a collider in its path.
+- Changed the KenematicObject to only kill vertical velocity when moving vertically
+
 ## New features
