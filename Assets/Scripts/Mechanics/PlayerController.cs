@@ -26,6 +26,12 @@ namespace Platformer.Mechanics
         /// Initial jump velocity at the start of a jump.
         /// </summary>
         public float jumpTakeOffSpeed = 7;
+        /// <summary>
+        /// The maximum time the player has to accelerate, while holding down the jump button
+        /// </summary>
+        public float maxJumpAccelerationTime = 0.5f;
+        /// Timer to keep track of the time the player has left to accelerate
+        private float jumpAccelerationTimer;
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
@@ -57,11 +63,18 @@ namespace Platformer.Mechanics
             {
                 move.x = Input.GetAxis("Horizontal");
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                {
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                    jumpAccelerationTimer = maxJumpAccelerationTime;
+                }
+                else if (Input.GetButtonUp("Jump") || jumpAccelerationTimer <= 0)
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
+                }
+                else if (jumpState != JumpState.Grounded) 
+                {
+                    jumpAccelerationTimer -= Time.deltaTime;
                 }
             }
             else
