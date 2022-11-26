@@ -50,17 +50,33 @@ namespace Platformer.Mechanics
                     //if token is null, it has been disabled and is no longer animated.
                     if (token != null)
                     {
-                        token._renderer.sprite = token.sprites[token.frame];
-                        if (token.collected && token.frame == token.sprites.Length - 1)
+                        if (!token.inactive)
                         {
-                            token.gameObject.SetActive(false);
-                            tokens[i] = null;
+                            token._renderer.sprite = token.sprites[token.frame];
+                            if (token.collected && token.frame == token.sprites.Length - 1)
+                            {
+                                token.gameObject.SetActive(false);
+                                if (token.givesDoubleJump) 
+                                {
+                                    token.inactive = true;
+                                    token.inactiveTime = Time.time;
+                                } 
+                                else
+                                {
+                                    tokens[i] = null;
+                                }
+                            }
+                            else
+                            {
+                                token.frame = (token.frame + 1) % token.sprites.Length;
+                            }
                         }
-                        else
+                        else if (token.inactiveTime + token.respawnCooldown < Time.time)
                         {
-                            token.frame = (token.frame + 1) % token.sprites.Length;
+                           token.Respawn();
+                           token.gameObject.SetActive(true);
                         }
-                    }
+                    } 
                 }
                 //calculate the time of the next frame.
                 nextFrameTime += 1f / frameRate;
