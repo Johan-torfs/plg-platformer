@@ -18,3 +18,4 @@ When a player was stood next to a wall, he would be unable to jump sometimes. Th
 When a player is close to a wall, the player can jump away from the wall.
 - Made it so the player well always be pushed away from the wall
 - The player can control how far he is pushed by holding the directionals
+- Updated tilemap to make wall jumping necessary
