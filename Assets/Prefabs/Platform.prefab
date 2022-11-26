@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -134,6 +134,7 @@ MonoBehaviour:
   finalSprite: {fileID: 0}
   width: 3
   tileResolution: 100
+  pixelsPerUnit: 300
 --- !u!212 &3359534159123711493
 SpriteRenderer:
   m_ObjectHideFlags: 0
