@@ -31,3 +31,11 @@ When a player is close to a wall, the player can jump away from the wall.
 - The player has only one double jump
 - The double jump gets reset when the player lands on the ground
 - Moved victory point to create a bit more challenge
+
+### Double jump crystals
+- Added a different color token that gives the player another double jump
+- Added (hidden) areas that require double jump
+
+## Todo
+- Make player change color when a double jump is available
+- Add a counter for the tokens (for the collectivists)
