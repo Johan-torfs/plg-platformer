@@ -40,3 +40,4 @@ When a player is close to a wall, the player can jump away from the wall.
 ## Todo
 - Add a counter for the tokens (for the collectivists)
 - Fix bug when jumping into moving platforms
+- Fix bug where when dying without double jump, the player does not get his double jump back until he lands
