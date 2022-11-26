@@ -176,7 +176,7 @@ namespace Platformer.Mechanics
             }
             else if (jump == JumpType.WallBackward)
             {
-                acceleration.x = direction * wallJumpTakeOffAcceleration / 2 * model.jumpModifier;
+                acceleration.x = direction * wallJumpTakeOffAcceleration * model.jumpModifier;
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = JumpType.None;
             }
