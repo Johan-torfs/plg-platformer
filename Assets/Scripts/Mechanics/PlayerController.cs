@@ -19,6 +19,10 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        [Header("Player Colors")]
+        public Color normalColor;
+        public Color noDoubleJumpColor;
+
         [Header("Movement Settings")]
         /// <summary>
         /// Max horizontal speed of the player.
@@ -108,6 +112,7 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             ReduceAcceleration();
             base.Update();
@@ -130,7 +135,7 @@ namespace Platformer.Mechanics
                     else 
                     {
                         jump = JumpType.Double;
-                        hasDoubleJump = false;
+                        DoubleJumpRemove();
                     }
                     break;
                 case JumpState.Jumping:
@@ -149,7 +154,7 @@ namespace Platformer.Mechanics
                     break;
                 case JumpState.Landed:
                     jumpState = JumpState.Grounded;
-                    hasDoubleJump = true;
+                    DoubleJumpAdd();
                     break;
             }
         }
@@ -219,6 +224,16 @@ namespace Platformer.Mechanics
         public bool onWallBackward() {
             RaycastHit2D raycastHit = Physics2D.BoxCast(Bounds.center, Bounds.size, 0, new Vector2(-direction, 0), 0.1f, terrainLayer);
             return raycastHit.collider != null;
+        }
+
+        public void DoubleJumpAdd() {
+            hasDoubleJump = true;
+            spriteRenderer.color = normalColor;
+        }
+
+        public void DoubleJumpRemove() {
+            hasDoubleJump = false;
+            spriteRenderer.color = noDoubleJumpColor;
         }
 
         public enum JumpState
