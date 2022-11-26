@@ -29,6 +29,12 @@ namespace Platformer.Mechanics
         //active frame in animation, updated by the controller.
         internal int frame = 0;
         internal bool collected = false;
+        public bool inactive = false;
+        public float inactiveTime;
+
+        [Header("Double Jump Crystals")]
+        public bool givesDoubleJump;
+        public float respawnCooldown = 2.0f;
 
         void Awake()
         {
@@ -57,6 +63,15 @@ namespace Platformer.Mechanics
             var ev = Schedule<PlayerTokenCollision>();
             ev.token = this;
             ev.player = player;
+
+            if (givesDoubleJump)
+                player.hasDoubleJump = true;
+        }
+
+        public void Respawn() {
+            sprites = idleAnimation;
+            inactive = false;
+            collected = false;
         }
     }
 }
