@@ -19,7 +19,7 @@ namespace Platformer.Mechanics
         public int tileResolution = 100; 
         public int pixelsPerUnit = 300;
 
-        Vector2 move;
+        internal Vector2 move;
 
         void Awake() {
             Draw();
