@@ -30,6 +30,9 @@ namespace Platformer.Mechanics
         internal int frame = 0;
         internal bool collected = false;
 
+        [Header("Double Jump Crystals")]
+        public bool givesDoubleJump;
+
         void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
@@ -57,6 +60,9 @@ namespace Platformer.Mechanics
             var ev = Schedule<PlayerTokenCollision>();
             ev.token = this;
             ev.player = player;
+
+            if (givesDoubleJump)
+                player.hasDoubleJump = true;
         }
     }
 }

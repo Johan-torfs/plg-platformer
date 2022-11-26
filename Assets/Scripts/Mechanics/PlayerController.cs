@@ -62,7 +62,7 @@ namespace Platformer.Mechanics
         public bool controlEnabled = true;
 
         private bool stopJump;
-        private bool hasDoubleJump = true;
+        public bool hasDoubleJump = true;
         private JumpType jump = JumpType.None;
         Vector2 move;
         Vector2 acceleration;
