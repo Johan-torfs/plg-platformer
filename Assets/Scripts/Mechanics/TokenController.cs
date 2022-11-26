@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 namespace Platformer.Mechanics
 {
@@ -18,6 +19,15 @@ namespace Platformer.Mechanics
 
         float nextFrameTime = 0;
 
+        // UI text for tokens collected
+        [SerializeField] TextMeshProUGUI tokensText;
+
+        // Total amount of token to collect, not counting the jump crystals
+        int totalTokens = 0;
+
+        // Amount of collected tokens
+        int collectedTokens = 0;
+
         [ContextMenu("Find All Tokens")]
         void FindAllTokensInScene()
         {
@@ -35,7 +45,10 @@ namespace Platformer.Mechanics
             {
                 tokens[i].tokenIndex = i;
                 tokens[i].controller = this;
+                if (!tokens[i].givesDoubleJump)
+                    totalTokens++;
             }
+            tokensText.text = collectedTokens + "/" + totalTokens;
         }
 
         void Update()
@@ -64,6 +77,7 @@ namespace Platformer.Mechanics
                                 else
                                 {
                                     tokens[i] = null;
+                                    IncrementCollectedTokens();
                                 }
                             }
                             else
@@ -81,6 +95,11 @@ namespace Platformer.Mechanics
                 //calculate the time of the next frame.
                 nextFrameTime += 1f / frameRate;
             }
+        }
+
+        private void IncrementCollectedTokens() {
+            collectedTokens++;
+            tokensText.text = collectedTokens + "/" + totalTokens;
         }
 
     }

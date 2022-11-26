@@ -39,8 +39,12 @@ When a player is close to a wall, the player can jump away from the wall.
 - Added a different color token that gives the player another double jump
 - Added (hidden) areas that require double jump
 
+### Token counter
+- Added a counter on the UI to let the player know how many tokens they have collected and more importantly... missed
+- Excluded jump crystals from being counted towards the token total
+
 ## Todo
-- Add a counter for the tokens (for the collectivists)
 - Fix bug when jumping into moving platforms
 - Fix bug where when dying without double jump, the player does not get his double jump back until he lands
 - Write a controller to draw the platform sprites instead of drawing them for each platform seperately
+- Make the player stick to a moving platform
