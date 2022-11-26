@@ -62,6 +62,7 @@ namespace Platformer.Mechanics
         public bool controlEnabled = true;
 
         private bool stopJump;
+        private bool hasDoubleJump = true;
         private JumpType jump = JumpType.None;
         Vector2 move;
         Vector2 acceleration;
@@ -86,7 +87,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if ((jumpState == JumpState.Grounded || onWallForward() || onWallBackward()) && Input.GetButtonDown("Jump") && (jumpTimer <= 0))
+                if ((jumpState == JumpState.Grounded || onWallForward() || onWallBackward() || hasDoubleJump) && Input.GetButtonDown("Jump") && (jumpTimer <= 0))
                 {
                     jumpState = JumpState.PrepareToJump;
                     jumpAccelerationTimer = maxJumpAccelerationTime;
@@ -127,7 +128,10 @@ namespace Platformer.Mechanics
                     else if (onWallBackward())
                         jump = JumpType.WallBackward;
                     else 
-                        jump = JumpType.Normal;
+                    {
+                        jump = JumpType.Double;
+                        hasDoubleJump = false;
+                    }
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
@@ -145,6 +149,7 @@ namespace Platformer.Mechanics
                     break;
                 case JumpState.Landed:
                     jumpState = JumpState.Grounded;
+                    hasDoubleJump = true;
                     break;
             }
         }
@@ -172,6 +177,11 @@ namespace Platformer.Mechanics
             else if (jump == JumpType.WallBackward)
             {
                 acceleration.x = direction * wallJumpTakeOffAcceleration / 2 * model.jumpModifier;
+                velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                jump = JumpType.None;
+            }
+            else if (jump == JumpType.Double)
+            {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = JumpType.None;
             }
@@ -225,7 +235,8 @@ namespace Platformer.Mechanics
             None,
             Normal,
             WallForward,
-            WallBackward
+            WallBackward,
+            Double
         }
     }
 }
