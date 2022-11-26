@@ -19,6 +19,10 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        [Header("Player Colors")]
+        public Color normalColor;
+        public Color noDoubleJumpColor;
+
         [Header("Movement Settings")]
         /// <summary>
         /// Max horizontal speed of the player.
@@ -62,6 +66,7 @@ namespace Platformer.Mechanics
         public bool controlEnabled = true;
 
         private bool stopJump;
+        public bool hasDoubleJump = true;
         private JumpType jump = JumpType.None;
         Vector2 move;
         Vector2 acceleration;
@@ -86,7 +91,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if ((jumpState == JumpState.Grounded || onWallForward() || onWallBackward()) && Input.GetButtonDown("Jump") && (jumpTimer <= 0))
+                if ((jumpState == JumpState.Grounded || onWallForward() || onWallBackward() || hasDoubleJump) && Input.GetButtonDown("Jump") && (jumpTimer <= 0))
                 {
                     jumpState = JumpState.PrepareToJump;
                     jumpAccelerationTimer = maxJumpAccelerationTime;
@@ -107,6 +112,7 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             ReduceAcceleration();
             base.Update();
@@ -127,7 +133,10 @@ namespace Platformer.Mechanics
                     else if (onWallBackward())
                         jump = JumpType.WallBackward;
                     else 
-                        jump = JumpType.Normal;
+                    {
+                        jump = JumpType.Double;
+                        DoubleJumpRemove();
+                    }
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
@@ -145,6 +154,7 @@ namespace Platformer.Mechanics
                     break;
                 case JumpState.Landed:
                     jumpState = JumpState.Grounded;
+                    DoubleJumpAdd();
                     break;
             }
         }
@@ -171,7 +181,12 @@ namespace Platformer.Mechanics
             }
             else if (jump == JumpType.WallBackward)
             {
-                acceleration.x = direction * wallJumpTakeOffAcceleration / 2 * model.jumpModifier;
+                acceleration.x = direction * wallJumpTakeOffAcceleration * model.jumpModifier;
+                velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                jump = JumpType.None;
+            }
+            else if (jump == JumpType.Double)
+            {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = JumpType.None;
             }
@@ -211,6 +226,16 @@ namespace Platformer.Mechanics
             return raycastHit.collider != null;
         }
 
+        public void DoubleJumpAdd() {
+            hasDoubleJump = true;
+            spriteRenderer.color = normalColor;
+        }
+
+        public void DoubleJumpRemove() {
+            hasDoubleJump = false;
+            spriteRenderer.color = noDoubleJumpColor;
+        }
+
         public enum JumpState
         {
             Grounded,
@@ -225,7 +250,8 @@ namespace Platformer.Mechanics
             None,
             Normal,
             WallForward,
-            WallBackward
+            WallBackward,
+            Double
         }
     }
 }

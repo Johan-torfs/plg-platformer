@@ -16,7 +16,7 @@ When a player was stood next to a wall, he would be unable to jump sometimes. Th
 ## New features
 ### Wall jump
 When a player is close to a wall, the player can jump away from the wall.
-- Made it so the player well always be pushed away from the wall
+- Made it so the player will always be pushed away from the wall
 - The player can control how far he is pushed by holding the directionals
 - Updated tilemap to make wall jumping necessary
 
@@ -25,3 +25,18 @@ When a player is close to a wall, the player can jump away from the wall.
 - Added a prefab MovingPlatform
 - Added PlatformController to make the platform follow a given PatrolPath
 - Added the MovingPlatforms to the scene and changed the position of some of the tokens to fit the updated platforms
+
+### Double jump
+- Added a double jump
+- The player has only one double jump
+- The double jump gets reset when the player lands on the ground
+- Moved victory point to create a bit more challenge
+- Player changes color when he has no double jump available
+
+### Double jump crystals
+- Added a different color token that gives the player another double jump
+- Added (hidden) areas that require double jump
+
+## Todo
+- Add a counter for the tokens (for the collectivists)
+- Fix bug when jumping into moving platforms
