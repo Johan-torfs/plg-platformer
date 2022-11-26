@@ -27,6 +27,7 @@ When a player is close to a wall, the player can jump away from the wall.
 - Added the MovingPlatforms to the scene and changed the position of some of the tokens to fit the updated platforms
 - Changed platforms so they use a sprite renderer and box collider, instead of moving a tilemap for every platform
 - Made a Draw method to draw each platform based on a given width
+- If the player is standing on a moving platform, the player will move along with the platform
 
 ### Double jump
 - Added a double jump
@@ -44,6 +45,7 @@ When a player is close to a wall, the player can jump away from the wall.
 - Excluded jump crystals from being counted towards the token total
 
 ## Todo
-- Fix bug when jumping into moving platforms
+- Fix bug when jumping into moving platforms 
+  - Most likely due to the wall jump, seeing as this happens when close to a wall on one side and a platform on the other
 - Write a controller to draw the platform sprites instead of drawing them for each platform seperately
-- Make the player stick to a moving platform
+- When the platform turns, the player unintentialy exits the idle animation
