@@ -210,8 +210,8 @@ namespace Platformer.Mechanics
             move *= maxSpeed;
             if (platform != null)
             {
+                animator.SetFloat("velocityX", Mathf.Abs(velocity.x - platform.move.x / Time.deltaTime) / maxSpeed);
                 move += platform.move / Time.deltaTime;
-                animator.SetFloat("velocityX", Mathf.Round(Mathf.Abs(velocity.x - platform.move.x / Time.deltaTime) * 10.0f / maxSpeed) / 10.0f);
             } 
             else
             {
