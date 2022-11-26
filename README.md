@@ -25,6 +25,8 @@ When a player is close to a wall, the player can jump away from the wall.
 - Added a prefab MovingPlatform
 - Added PlatformController to make the platform follow a given PatrolPath
 - Added the MovingPlatforms to the scene and changed the position of some of the tokens to fit the updated platforms
+- Changed platforms so they use a sprite renderer and box collider, instead of moving a tilemap for every platform
+- Made a Draw method to draw each platform based on a given width
 
 ### Double jump
 - Added a double jump
@@ -41,4 +43,4 @@ When a player is close to a wall, the player can jump away from the wall.
 - Add a counter for the tokens (for the collectivists)
 - Fix bug when jumping into moving platforms
 - Fix bug where when dying without double jump, the player does not get his double jump back until he lands
-- Should replace the platforms with sprite + box collider instead of using a tilemap for every platform
+- Write a controller to draw the platform sprites instead of drawing them for each platform seperately
