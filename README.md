@@ -45,6 +45,5 @@ When a player is close to a wall, the player can jump away from the wall.
 
 ## Todo
 - Fix bug when jumping into moving platforms
-- Fix bug where when dying without double jump, the player does not get his double jump back until he lands
 - Write a controller to draw the platform sprites instead of drawing them for each platform seperately
 - Make the player stick to a moving platform
