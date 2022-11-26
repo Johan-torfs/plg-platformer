@@ -33,6 +33,19 @@ namespace Platformer.Mechanics
                     return path.transform.TransformPoint(Vector2.Lerp(path.startPosition, path.endPosition, p));
                 }
             }
+
+            /// <summary>
+            /// Get the position of the mover for the current frame. Ignoring the transform of the path.
+            /// </summary>
+            /// <value></value>
+            public Vector2 PositionLocal
+            {
+                get
+                {
+                    p = Mathf.InverseLerp(0, duration, Mathf.PingPong(Time.time - startTime, duration));
+                    return Vector2.Lerp(path.startPosition, path.endPosition, p);
+                }
+            }
         }
     }
 }

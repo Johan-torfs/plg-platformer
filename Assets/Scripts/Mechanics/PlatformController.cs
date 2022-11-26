@@ -12,13 +12,12 @@ namespace Platformer.Mechanics
 
         Vector2 move;
 
-        // Update is called once per frame
         void Update()
         {
             if (path != null)
             {
                 if (mover == null) mover = path.CreateMover(maxSpeed * 0.5f);
-                move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+                move.x = Mathf.Clamp(mover.PositionLocal.x - transform.position.x, -1, 1);
                 transform.Translate(move);
             }
         }
