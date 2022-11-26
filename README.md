@@ -14,3 +14,7 @@ When a player was stood next to a wall, he would be unable to jump sometimes. Th
 - Changed the KenematicObject to only kill vertical velocity when moving vertically
 
 ## New features
+### Wall jump
+When a player is close to a wall, the player can jump away from the wall.
+- Made it so the player well always be pushed away from the wall
+- The player can control how far he is pushed by holding the directionals
