@@ -65,7 +65,7 @@ namespace Platformer.Mechanics
             ev.player = player;
 
             if (givesDoubleJump)
-                player.hasDoubleJump = true;
+                player.DoubleJumpAdd();
         }
 
         public void Respawn() {
