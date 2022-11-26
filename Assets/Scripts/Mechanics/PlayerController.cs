@@ -202,11 +202,23 @@ namespace Platformer.Mechanics
             FlipSprite();
 
             animator.SetBool("grounded", IsGrounded);
-            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             if (IsGrounded) 
                 acceleration = Vector2.zero;
-            targetVelocity = move * maxSpeed + acceleration;
+            PlatformController platform = onPlatfrom();
+
+            move *= maxSpeed;
+            if (platform != null)
+            {
+                animator.SetFloat("velocityX", Mathf.Abs(velocity.x - platform.move.x / Time.deltaTime) / maxSpeed);
+                move += platform.move / Time.deltaTime;
+            } 
+            else
+            {
+                animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            }
+            
+            targetVelocity = move + acceleration;
         }
 
         private void FlipSprite() {
@@ -224,6 +236,15 @@ namespace Platformer.Mechanics
         public bool onWallBackward() {
             RaycastHit2D raycastHit = Physics2D.BoxCast(Bounds.center, Bounds.size, 0, new Vector2(-direction, 0), 0.1f, terrainLayer);
             return raycastHit.collider != null;
+        }
+
+        public PlatformController onPlatfrom() {
+            RaycastHit2D raycastHit = Physics2D.BoxCast(Bounds.center, Bounds.size, 0, Vector2.down, 0.1f, terrainLayer);
+            if (raycastHit.collider == null)
+                return null;
+            if (!raycastHit.transform.gameObject.CompareTag("MovingPlatform"))
+                return null;
+            return raycastHit.transform.gameObject.GetComponent<PlatformController>();
         }
 
         public void DoubleJumpAdd() {
