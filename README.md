@@ -44,8 +44,13 @@ When a player is close to a wall, the player can jump away from the wall.
 - Added a counter on the UI to let the player know how many tokens they have collected and more importantly... missed
 - Excluded jump crystals from being counted towards the token total
 
+### Checkpoints
+- Added checkpoints that replace the spawnpoint when the player passes through
+- The checkpoint trigger gets destroyed once triggered, so the player can only trigger it once
+
 ## Todo
 - Fix bug when jumping into moving platforms 
   - Most likely due to the wall jump, seeing as this happens when close to a wall on one side and a platform on the other
 - Write a controller to draw the platform sprites instead of drawing them for each platform seperately
 - When the platform turns, the player unintentialy exits the idle animation
+- Make visuals for the checkpoints
