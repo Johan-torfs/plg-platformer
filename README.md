@@ -19,6 +19,7 @@ When a player is close to a wall, the player can jump away from the wall.
 - Made it so the player will always be pushed away from the wall
 - The player can control how far he is pushed by holding the directionals
 - Updated tilemap to make wall jumping necessary
+- Changed the force with which the player gets pushed away
 
 ### Moving platforms
 - Made an addition to the PatrolPath to get the local position
@@ -54,3 +55,4 @@ When a player is close to a wall, the player can jump away from the wall.
 - Write a controller to draw the platform sprites instead of drawing them for each platform seperately
 - When the platform turns, the player unintentialy exits the idle animation
 - Make visuals for the checkpoints
+- Make it so the player cannot spam jump into a wall
