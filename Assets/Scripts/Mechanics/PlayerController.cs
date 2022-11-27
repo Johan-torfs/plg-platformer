@@ -257,6 +257,10 @@ namespace Platformer.Mechanics
             spriteRenderer.color = noDoubleJumpColor;
         }
 
+        public void SetCheckpoint(Transform checkpoint) {
+            model.spawnPoint = checkpoint;
+        }
+
         public enum JumpState
         {
             Grounded,
